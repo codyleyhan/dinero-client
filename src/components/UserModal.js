@@ -1,26 +1,28 @@
 import React from 'react';
 
 
-const UserModal = ({ user, logout }) => {
-  if(!user.loggedIn) {
+const UserModal = React.createClass({
+  componentDidUpdate() {
+    if(!this.props.user.loggedIn) {
+      this.props.router.push('/login');
+    }
+  },
+
+  render() {
+    const { user, logout } = this.props;
+
     return (
       <div>
-        <h2>You must login first.</h2>
+        <h2>{user.username.toUpperCase()}</h2>
+        <div>Email: {user.email}</div>
+        <div>id: {user.id}</div>
+        <div>role: {user.role}</div>
+        <div>Token: {user.token}</div>
+        <button onClick={logout}>Logout</button>
       </div>
     )
   }
-
-  return (
-    <div>
-      <h2>{user.username.toUpperCase()}</h2>
-      <div>Email: {user.email}</div>
-      <div>id: {user.id}</div>
-      <div>role: {user.role}</div>
-      <div>Token: {user.token}</div>
-      <button onClick={logout}>Logout</button>
-    </div>
-  )
-}
+})
 
 UserModal.propTypes = {
   user: React.PropTypes.shape({

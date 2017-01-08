@@ -8,12 +8,13 @@ import Main from './Main';
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
+    restaurants: state.restaurants
   };
 }
 
 export function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actions.userActions, dispatch);
+  return bindActionCreators(actions, dispatch);
 }
 
 const App = connect(mapStateToProps, mapDispatchToProps)(Main);

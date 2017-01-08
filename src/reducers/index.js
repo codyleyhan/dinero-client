@@ -2,9 +2,20 @@ import { combineReducers } from 'redux';
 
 import { routerReducer } from 'react-router-redux';
 
-import user from './user';
+import { user, userDefaultState } from './user';
+import { restaurants, restaurantsDefaultState } from './restaurants';
 
-const rootReducer = combineReducers({user, routing: routerReducer })
+const rootReducer = combineReducers({user, restaurants, routing: routerReducer })
 
+
+const defaultStates = {
+  restaurants: restaurantsDefaultState,
+  user: userDefaultState
+}
+
+export {
+  defaultStates,
+  rootReducer
+}
 
 export default rootReducer;

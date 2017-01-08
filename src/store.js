@@ -1,18 +1,16 @@
 import { createStore, applyMiddleware, compose} from 'redux';
-import { syncHistoryWithStore } from 'react-router-redux';
+import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 import thunk from 'redux-thunk';
 
-import rootReducer from './reducers/index';
-import { userDefaultState } from './reducers/user';
+import { rootReducer, defaultStates } from './reducers/index';
 
 
-const defaultState = {
-  user: userDefaultState
-};
+const defaultState = defaultStates;
 
 const enhancers = compose(
   applyMiddleware(thunk),
+  applyMiddleware(routerMiddleware(browserHistory)),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 );
 

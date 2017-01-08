@@ -87,5 +87,6 @@ const user = (state=userDefaultState, action) => {
 export default user;
 
 export {
-  userDefaultState
+  userDefaultState,
+  user
 };

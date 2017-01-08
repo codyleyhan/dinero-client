@@ -1,5 +1,7 @@
 import axios from 'axios';
+
 import config from '../config';
+
 
 export function registerUser({username, password, email, name}) {
   return (dispatch) => {
@@ -21,7 +23,7 @@ export function registerUser({username, password, email, name}) {
   }
 }
 
-export function postingUser() {
+function postingUser() {
   return {
     type: 'POSTING_USER'
   }
@@ -51,14 +53,13 @@ export function logout() {
   };
 }
 
-export function loginSuccess({token}) {
+function loginSuccess({token}) {
   return {
     type: 'LOGIN_SUCCESS',
     token
   }
 }
-
-export function loginError({errors}) {
+function loginError({errors}) {
   return {
     type: 'LOGIN_ERROR',
     errors

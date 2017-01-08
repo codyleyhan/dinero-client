@@ -1,9 +1,9 @@
 import React from 'react';
+import Errors from './Errors';
 
 
 let RegisterModal = React.createClass({
   getInitialState() {
-    console.log(this.props);
     return {
       email: '',
       username: '',
@@ -14,10 +14,20 @@ let RegisterModal = React.createClass({
     }
   },
 
+  componentDidUpdate() {
+    if(this.props.user.loggedIn) {
+      this.props.router.push('/dash');
+    }
+  },
+
   render() {
+    const { registerUser, user } = this.props;
+    const { errors } = user;
+
     return (
       <div>
         <h1>Register</h1>
+        <Errors errors={errors} />
         <label>Email</label>
         <input type="email" value={this.state.email} placeholder="Email Address" onChange={(e) => {
           this.setState({
@@ -59,7 +69,7 @@ let RegisterModal = React.createClass({
         }}  />
         <button onClick={(e) => {
           e.preventDefault();
-          this.props.registerUser(this.state);
+          registerUser(this.state);
         }}>Submit</button>
       </div>
     )

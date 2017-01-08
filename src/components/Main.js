@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 const Main = React.createClass({
   render() {
     return (
-      <div>
+      <div className="main">
         <h1>
           <Link to="/">Dinero</Link>
           <br />

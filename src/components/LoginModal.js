@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Errors from './Errors';
 
 let LoginModal = React.createClass({
   getInitialState() {
@@ -7,6 +8,12 @@ let LoginModal = React.createClass({
       email: '',
       password: '',
       errors: {...this.props.user.errors}
+    }
+  },
+
+  componentDidUpdate() {
+    if(this.props.user.loggedIn) {
+      this.props.router.push('/dash');
     }
   },
 
@@ -26,10 +33,13 @@ let LoginModal = React.createClass({
   },
 
   render() {
+    const { loggingIn, loginUser } = this.props;
+    const { errors } = this.props.user;
+
     return (
       <div>
         <h1>Login</h1>
-        { this.renderErrors() }
+        <Errors errors={errors} />
         <label>Email</label>
         <input type="email" value={this.state.email} placeholder="Email Address" onChange={(e) => {
           this.setState({
@@ -47,10 +57,21 @@ let LoginModal = React.createClass({
           });
         }}  />
         <br />
-        <button onClick={(e) => {
-          e.preventDefault();
-          this.props.loginUser(this.state);
-        }}>Submit</button>
+        {
+          loggingIn ?
+            (<button disabled>
+              Logging In <span className="loader">Loading...</span>;
+            </button>)
+            :
+            (
+              <button onClick={(e) => {
+                e.preventDefault();
+                loginUser(this.state);
+              }}>
+                Submit
+              </button>
+            )
+        }
       </div>
     )
   }
